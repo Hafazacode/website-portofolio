@@ -9,19 +9,49 @@ export default function HrSummary() {
       {/* foto profil & biodata */}
       <div className="summary-lead-col">
         <div className="popout-portrait-wrapper">
-          <div className="portrait-offset-layer" aria-hidden="true" />
+          {/* Lapisan plinth arsitektural dengan tanda sudut */}
+          <div className="portrait-offset-layer" aria-hidden="true">
+            <span className="plinth-bracket top-left" />
+            <span className="plinth-bracket top-right" />
+            <span className="plinth-bracket bottom-left" />
+            <span className="plinth-bracket bottom-right" />
+            <span className="plinth-cadastral-tag">SPECIMEN · 01</span>
+          </div>
 
+          {/* Kubah relung arsitektural semi-realistis */}
           <div className="portrait-backdrop-window">
-            <div className="backdrop-window-panes" aria-hidden="true">
-              <div className="window-arch-ornament" />
+            {/* Batu kunci (Keystone) di puncak kubah */}
+            <div className="portal-keystone-mount" aria-hidden="true">
+              <span className="keystone-badge">✦</span>
             </div>
 
+            {/* Ruang relung bertekstur fluting & pencahayaan studio */}
+            <div className="backdrop-window-panes">
+              <div className="alcove-fluted-wall left" aria-hidden="true" />
+              <div className="alcove-fluted-wall right" aria-hidden="true" />
+              <div className="alcove-studio-halo" aria-hidden="true" />
+
+              <div className="window-arch-ornament">
+                <div className="arch-inner-bevel" />
+              </div>
+
+              {/* Tanda ukur / reticle estetis */}
+              <div className="portal-reticle-marks" aria-hidden="true">
+                <span className="reticle-mark top" />
+                <span className="reticle-mark left" />
+                <span className="reticle-mark right" />
+              </div>
+            </div>
+
+            {/* Plakat motto terukir di dasar portal */}
             <div className="portrait-caption-bar">
               <span className="portrait-caption-rule" aria-hidden="true" />
               <span className="backdrop-window-label">“We Can If We Try”</span>
+              <span className="portrait-caption-rule" aria-hidden="true" />
             </div>
           </div>
 
+          {/* Subjek foto yang melompat keluar dengan bayangan kontak realistis */}
           <div className="portrait-popout-subject">
             <img
               src={profileData.photoUrl}

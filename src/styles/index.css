@@ -647,108 +647,272 @@ button {
 .popout-portrait-wrapper {
   position: relative;
   width: 100%;
-  max-width: 308px;
-  height: 396px;
+  max-width: 310px;
+  height: 410px;
   margin: 0 auto;
-  padding-top: 62px;
+  padding-top: 54px;
   cursor: default;
 }
 
+/* Lapisan plinth arsitektural di belakang */
 .portrait-offset-layer {
   position: absolute;
-  top: 66px;
-  left: 4px;
-  right: -6px;
-  bottom: -6px;
-  background: #e6e2d6;
-  border: 1px solid #c9c4b6;
-  border-radius: 6px;
-  transform: rotate(1.6deg);
+  top: 58px;
+  left: 6px;
+  right: -8px;
+  bottom: -8px;
+  background: linear-gradient(135deg, #ede9dd 0%, #ded7c4 100%);
+  border: 1px dashed rgba(17, 19, 21, 0.24);
+  border-radius: 158px 158px 14px 14px;
+  transform: rotate(2.2deg);
   z-index: 0;
-  transition: transform 0.38s cubic-bezier(0.22, 1, 0.36, 1), border-color 0.38s ease;
+  transition: transform 0.42s cubic-bezier(0.22, 1, 0.36, 1), border-color 0.42s ease;
+  box-shadow: 0 16px 32px rgba(17, 19, 21, 0.08);
+}
+
+.plinth-bracket {
+  position: absolute;
+  width: 9px;
+  height: 9px;
+  border-color: rgba(17, 19, 21, 0.35);
+  border-style: solid;
+}
+.plinth-bracket.top-left {
+  top: 14px;
+  left: 14px;
+  border-width: 1.5px 0 0 1.5px;
+}
+.plinth-bracket.top-right {
+  top: 14px;
+  right: 14px;
+  border-width: 1.5px 1.5px 0 0;
+}
+.plinth-bracket.bottom-left {
+  bottom: 12px;
+  left: 12px;
+  border-width: 0 0 1.5px 1.5px;
+}
+.plinth-bracket.bottom-right {
+  bottom: 12px;
+  right: 12px;
+  border-width: 0 1.5px 1.5px 0;
+}
+
+.plinth-cadastral-tag {
+  position: absolute;
+  bottom: 9px;
+  right: 18px;
+  font-family: var(--sans);
+  font-size: 8.5px;
+  font-weight: 700;
+  letter-spacing: 0.14em;
+  color: rgba(17, 19, 21, 0.45);
 }
 
 .popout-portrait-wrapper:hover .portrait-offset-layer {
-  transform: rotate(-1deg) translate(-3px, 3px);
+  transform: rotate(-0.8deg) translate(-4px, 4px);
   border-color: rgba(200, 75, 49, 0.45);
 }
 
+/* Kubah portal arsitektural semi-realistis */
 .portrait-backdrop-window {
   position: absolute;
-  top: 62px;
+  top: 54px;
   left: 0;
   right: 0;
   bottom: 0;
-  background: linear-gradient(180deg, #faf9f5 0%, #edeae0 100%);
-  border: 1px solid #bab4a6;
-  border-radius: 6px;
+  background: linear-gradient(165deg, #ffffff 0%, #f6f4ee 25%, #ede8dc 65%, #ded6c4 100%);
+  border: 1px solid #c2bba8;
+  border-radius: 154px 154px 12px 12px;
   box-shadow:
-    0 14px 30px rgba(17, 19, 21, 0.07),
-    inset 0 0 0 5px #f6f5f2,
-    inset 0 0 0 6px rgba(17, 19, 21, 0.08);
+    0 24px 50px -12px rgba(17, 19, 21, 0.16),
+    0 10px 20px -6px rgba(17, 19, 21, 0.08),
+    inset 0 1.5px 0 rgba(255, 255, 255, 0.95),
+    inset 0 -1.5px 0 rgba(17, 19, 21, 0.08);
   z-index: 1;
   display: flex;
   flex-direction: column;
   overflow: hidden;
-  transition: transform 0.38s cubic-bezier(0.22, 1, 0.36, 1), box-shadow 0.38s ease;
+  transition: transform 0.42s cubic-bezier(0.22, 1, 0.36, 1), box-shadow 0.42s ease, border-color 0.3s ease;
 }
 
 .popout-portrait-wrapper:hover .portrait-backdrop-window {
-  transform: translateY(-2px);
+  transform: translateY(-3px);
+  border-color: #a89f8b;
   box-shadow:
-    0 18px 36px rgba(17, 19, 21, 0.1),
-    inset 0 0 0 5px #f6f5f2,
-    inset 0 0 0 6px rgba(200, 75, 49, 0.22);
+    0 30px 60px -14px rgba(17, 19, 21, 0.2),
+    0 12px 24px -6px rgba(17, 19, 21, 0.1),
+    inset 0 1.5px 0 rgba(255, 255, 255, 1);
 }
 
-.backdrop-window-panes {
-  position: relative;
-  flex: 1;
-  margin: 14px 14px 0;
-  background: radial-gradient(
-    circle at 50% 36%,
-    rgba(255, 255, 255, 0.9) 0%,
-    rgba(229, 225, 214, 0.45) 78%
-  );
-  border-radius: 4px 4px 0 0;
-  overflow: hidden;
-}
-
-.window-arch-ornament {
+/* Batu kunci (Keystone) di puncak lengkungan */
+.portal-keystone-mount {
   position: absolute;
+  top: 5px;
   left: 50%;
-  top: 14px;
   transform: translateX(-50%);
-  width: 78%;
-  height: 96%;
-  border: 1px solid rgba(17, 19, 21, 0.12);
-  border-bottom: none;
-  border-radius: 140px 140px 0 0;
-  background: linear-gradient(
-    180deg,
-    rgba(246, 245, 242, 0.75) 0%,
-    rgba(234, 230, 219, 0.3) 100%
-  );
-}
-
-.portrait-caption-bar {
-  position: relative;
-  z-index: 4;
-  height: 32px;
-  background: rgba(250, 249, 245, 0.94);
-  border-top: 1px solid rgba(17, 19, 21, 0.1);
+  z-index: 5;
   display: flex;
   align-items: center;
   justify-content: center;
-  gap: 8px;
-  padding: 0 14px;
+  pointer-events: none;
+}
+
+.keystone-badge {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 22px;
+  height: 18px;
+  background: #f6f4ed;
+  border: 1px solid #b5ad9a;
+  border-radius: 2px 2px 4px 4px;
+  color: var(--accent);
+  font-size: 10px;
+  line-height: 1;
+  box-shadow:
+    0 2px 5px rgba(17, 19, 21, 0.12),
+    inset 0 1px 0 rgba(255, 255, 255, 0.9);
+}
+
+/* Ruang relung berkedalaman volumetrik */
+.backdrop-window-panes {
+  position: relative;
+  flex: 1;
+  margin: 12px 12px 0;
+  border-radius: 142px 142px 6px 6px;
+  overflow: hidden;
+  background: #f1ede3;
+  box-shadow:
+    inset 0 18px 32px -6px rgba(17, 19, 21, 0.28),
+    inset 0 3px 6px rgba(17, 19, 21, 0.16),
+    inset 0 0 0 1px rgba(17, 19, 21, 0.1);
+}
+
+/* Efek studio lighting hangat di balik subjek */
+.alcove-studio-halo {
+  position: absolute;
+  inset: 0;
+  background: radial-gradient(
+    ellipse at 50% 36%,
+    rgba(255, 255, 255, 0.98) 0%,
+    rgba(255, 252, 245, 0.85) 30%,
+    rgba(240, 234, 219, 0.4) 60%,
+    transparent 85%
+  );
+  pointer-events: none;
+  z-index: 1;
+  transition: opacity 0.3s ease;
+}
+
+/* Kolom berusuk arsitektural (fluted stone) di kedua sayap */
+.alcove-fluted-wall {
+  position: absolute;
+  top: 40px;
+  bottom: 0;
+  width: 24px;
+  z-index: 0;
+  opacity: 0.65;
+  pointer-events: none;
+  background: repeating-linear-gradient(
+    90deg,
+    rgba(255, 255, 255, 0.55) 0px,
+    rgba(255, 255, 255, 0.55) 1.5px,
+    transparent 1.5px,
+    transparent 4px,
+    rgba(17, 19, 21, 0.08) 4px,
+    rgba(17, 19, 21, 0.08) 6px
+  );
+}
+.alcove-fluted-wall.left {
+  left: 0;
+  mask-image: linear-gradient(90deg, black 40%, transparent);
+  -webkit-mask-image: linear-gradient(90deg, black 40%, transparent);
+}
+.alcove-fluted-wall.right {
+  right: 0;
+  mask-image: linear-gradient(-90deg, black 40%, transparent);
+  -webkit-mask-image: linear-gradient(-90deg, black 40%, transparent);
+}
+
+/* Lengkungan dekoratif sekunder dengan bevel */
+.window-arch-ornament {
+  position: absolute;
+  left: 50%;
+  top: 10px;
+  transform: translateX(-50%);
+  width: 86%;
+  height: 94%;
+  border: 1px solid rgba(17, 19, 21, 0.14);
+  border-bottom: none;
+  border-radius: 126px 126px 0 0;
+  pointer-events: none;
+  z-index: 2;
+  box-shadow:
+    inset 0 1px 0 rgba(255, 255, 255, 0.9),
+    0 1px 2px rgba(17, 19, 21, 0.04);
+}
+
+.arch-inner-bevel {
+  position: absolute;
+  inset: 4px 4px 0 4px;
+  border: 1px solid rgba(255, 255, 255, 0.7);
+  border-bottom: none;
+  border-radius: 122px 122px 0 0;
+}
+
+/* Tanda reticle arsitektural */
+.portal-reticle-marks {
+  position: absolute;
+  inset: 0;
+  z-index: 2;
+  pointer-events: none;
+}
+
+.reticle-mark {
+  position: absolute;
+  background: rgba(17, 19, 21, 0.25);
+}
+.reticle-mark.top {
+  top: 24px;
+  left: 50%;
+  transform: translateX(-50%);
+  width: 1px;
+  height: 8px;
+}
+.reticle-mark.left {
+  top: 110px;
+  left: 8px;
+  width: 8px;
+  height: 1px;
+}
+.reticle-mark.right {
+  top: 110px;
+  right: 8px;
+  width: 8px;
+  height: 1px;
+}
+
+/* Plakat dasar bertulisan motto */
+.portrait-caption-bar {
+  position: relative;
+  z-index: 4;
+  height: 34px;
+  background: linear-gradient(180deg, #faf9f6 0%, #eeebe1 100%);
+  border-top: 1px solid rgba(17, 19, 21, 0.12);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 10px;
+  padding: 0 16px;
+  box-shadow: 0 -2px 6px rgba(17, 19, 21, 0.03);
 }
 
 .portrait-caption-rule {
   width: 14px;
   height: 1.5px;
   background: var(--accent);
-  opacity: 0.8;
+  opacity: 0.85;
 }
 
 .backdrop-window-label {
@@ -756,16 +920,17 @@ button {
   font-style: italic;
   font-size: 12px;
   font-weight: 600;
-  letter-spacing: 0.02em;
-  color: var(--text-secondary);
+  letter-spacing: 0.04em;
+  color: var(--text-primary);
 }
 
+/* Subjek foto yang melompat keluar */
 .portrait-popout-subject {
   position: absolute;
   top: 0;
   left: 6px;
   right: 6px;
-  bottom: 33px;
+  bottom: 35px;
   z-index: 3;
   display: flex;
   flex-direction: column;
@@ -781,12 +946,17 @@ button {
   object-fit: cover;
   object-position: center top;
   display: block;
-  filter: drop-shadow(0 10px 18px rgba(17, 19, 21, 0.16));
-  transition: transform 0.38s cubic-bezier(0.22, 1, 0.36, 1);
+  filter:
+    drop-shadow(0 14px 22px rgba(17, 19, 21, 0.24))
+    drop-shadow(0 4px 8px rgba(17, 19, 21, 0.12));
+  transition: transform 0.42s cubic-bezier(0.22, 1, 0.36, 1), filter 0.42s ease;
 }
 
 .popout-portrait-wrapper:hover .portrait-popout-img {
-  transform: translateY(-4px) scale(1.015);
+  transform: translateY(-6px) scale(1.02);
+  filter:
+    drop-shadow(0 20px 30px rgba(17, 19, 21, 0.28))
+    drop-shadow(0 6px 12px rgba(17, 19, 21, 0.16));
 }
 
 .classic-biodata-window {
@@ -1941,28 +2111,41 @@ button {
     gap: 16px;
   }
   .popout-portrait-wrapper {
-    max-width: 210px;
-    height: 268px;
-    padding-top: 42px;
+    max-width: 220px;
+    height: 286px;
+    padding-top: 38px;
   }
   .portrait-offset-layer {
-    top: 45px;
-    left: 3px;
-    right: -4px;
-    bottom: -4px;
+    top: 40px;
+    left: 4px;
+    right: -5px;
+    bottom: -5px;
+    border-radius: 112px 112px 10px 10px;
   }
   .portrait-backdrop-window {
-    top: 42px;
+    top: 36px;
+    border-radius: 108px 108px 10px 10px;
     box-shadow:
-      0 10px 22px rgba(17, 19, 21, 0.06),
-      inset 0 0 0 4px #f6f5f2,
-      inset 0 0 0 5px rgba(17, 19, 21, 0.08);
+      0 14px 28px rgba(17, 19, 21, 0.1),
+      inset 0 1px 0 rgba(255, 255, 255, 0.9);
   }
   .backdrop-window-panes {
-    margin: 9px 9px 0;
+    margin: 8px 8px 0;
+    border-radius: 100px 100px 5px 5px;
+  }
+  .window-arch-ornament {
+    border-radius: 90px 90px 0 0;
+  }
+  .arch-inner-bevel {
+    border-radius: 86px 86px 0 0;
+  }
+  .keystone-badge {
+    width: 18px;
+    height: 15px;
+    font-size: 8.5px;
   }
   .portrait-caption-bar {
-    height: 25px;
+    height: 26px;
     padding: 0 10px;
     gap: 6px;
   }
@@ -2500,21 +2683,35 @@ button {
     gap: 12px;
   }
   .popout-portrait-wrapper {
-    max-width: 178px;
-    height: 226px;
-    padding-top: 34px;
+    max-width: 184px;
+    height: 240px;
+    padding-top: 30px;
   }
   .portrait-offset-layer {
-    top: 37px;
-    left: 2px;
-    right: -3px;
-    bottom: -3px;
+    top: 32px;
+    left: 3px;
+    right: -4px;
+    bottom: -4px;
+    border-radius: 94px 94px 8px 8px;
   }
   .portrait-backdrop-window {
-    top: 34px;
+    top: 28px;
+    border-radius: 90px 90px 8px 8px;
   }
   .backdrop-window-panes {
-    margin: 7px 7px 0;
+    margin: 6px 6px 0;
+    border-radius: 84px 84px 4px 4px;
+  }
+  .window-arch-ornament {
+    border-radius: 76px 76px 0 0;
+  }
+  .arch-inner-bevel {
+    border-radius: 72px 72px 0 0;
+  }
+  .keystone-badge {
+    width: 16px;
+    height: 13px;
+    font-size: 7.5px;
   }
   .portrait-caption-bar {
     height: 22px;
