@@ -355,10 +355,8 @@ export default function ProjectsSection({ onSelectProject }) {
     <div id="projects" className="projects-editorial-section">
       <div className="section-header-split">
         <div>
-          <span className="section-index">{t.projectsBadge}</span>
           <h2>{t.projectsTitle}</h2>
         </div>
-
         <div className="project-category-tabs" role="tablist" aria-label={t.projectFilterAria}>
           {projectCategories.map((cat) => (
             <button
