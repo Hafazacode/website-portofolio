@@ -1,8 +1,11 @@
 import React from 'react';
-import { profileData } from '../data/portfolioData';
+import { useLanguage } from '../context/LanguageContext';
+import LanguageSwitcher from './LanguageSwitcher';
 import ScrambleButton from './ScrambleButton';
 
 export default function Navbar() {
+  const { profileData, t } = useLanguage();
+
   return (
     <header className="nav">
       <div className="nav-inner">
@@ -21,16 +24,17 @@ export default function Navbar() {
         </div>
 
         <nav className="nav-menu" aria-label="Navigasi Utama">
-          <a href="#sol">Profil</a>
-          <a href="#projects">Hasil Proyek</a>
-          <a href="#skills">Kompetensi</a>
+          <a href="#sol">{t.navProfile}</a>
+          <a href="#projects">{t.navProjects}</a>
+          <a href="#skills">{t.navSkills}</a>
         </nav>
 
         <div className="nav-end">
+          <LanguageSwitcher />
           <ScrambleButton
             href="#contact"
             className="nav-cta"
-            text="Hubungi →"
+            text={t.navContact}
           />
         </div>
       </div>

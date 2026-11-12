@@ -1,5 +1,5 @@
 import React, { useEffect, useRef } from 'react';
-import { profileData, heroPinsData } from '../data/portfolioData';
+import { useLanguage } from '../context/LanguageContext';
 import ScrambleButton from './ScrambleButton';
 
 // Landasan dasar untuk 3 area 3D
@@ -766,6 +766,7 @@ function drawVSCodeStackFloatingGUI(g, cam, cw, ch, dpr, isMobile, now) {
 }
 
 export default function Hero3DStory() {
+  const { profileData, heroPinsData, t, lang } = useLanguage();
   const storyRef = useRef(null);
   const canvasRef = useRef(null);
   const layer0Ref = useRef(null);
@@ -773,6 +774,11 @@ export default function Hero3DStory() {
   const heroCardRef = useRef(null);
   const progBarRef = useRef(null);
   const pinRefs = useRef([]);
+  const langRef = useRef(lang);
+
+  useEffect(() => {
+    langRef.current = lang;
+  }, [lang]);
 
   useEffect(() => {
     const story = storyRef.current;
@@ -1262,16 +1268,17 @@ export default function Hero3DStory() {
 
       drawVSCodeStackFloatingGUI(ctx, cam, cw, ch, dpr, isMobile, now);
 
+      const isEn = langRef.current === 'en';
       const zoneLabels = isMobile
         ? [
-            { x: -140, y: -10, z: -42, text: '01 · RPG RUNNER' },
-            { x: 0, y: -72, z: -46, text: '02 · TOPOLOGI CISCO 3D' },
-            { x: 144, y: -62, z: 4, text: '03 · PC WORKSTATION' },
+            { x: -140, y: -10, z: -42, text: isEn ? '01 · RPG RUNNER' : '01 · RPG RUNNER' },
+            { x: 0, y: -72, z: -46, text: isEn ? '02 · CISCO 3D TOPOLOGY' : '02 · TOPOLOGI CISCO 3D' },
+            { x: 144, y: -62, z: 4, text: isEn ? '03 · PC WORKSTATION' : '03 · PC WORKSTATION' },
           ]
         : [
-            { x: -140, y: -6, z: -42, text: '01 · RPG & ENDLESS RUNNER (GODOT 4)' },
-            { x: 0, y: -73, z: -46, text: '02 · TOPOLOGI JARINGAN CISCO 3D (4 VLAN)' },
-            { x: 144, y: -56, z: 4, text: '03 · PC RIG & CODE WORKSTATION' },
+            { x: -140, y: -6, z: -42, text: isEn ? '01 · RPG & ENDLESS RUNNER (GODOT 4)' : '01 · RPG & ENDLESS RUNNER (GODOT 4)' },
+            { x: 0, y: -73, z: -46, text: isEn ? '02 · 3D CISCO NETWORK TOPOLOGY (4 VLANS)' : '02 · TOPOLOGI JARINGAN CISCO 3D (4 VLAN)' },
+            { x: 144, y: -56, z: 4, text: isEn ? '03 · PC RIG & CODE WORKSTATION' : '03 · PC RIG & CODE WORKSTATION' },
           ];
 
       ctx.font = `700 ${Math.round((isMobile ? 6.2 : 9.5) * dpr)}px "Plus Jakarta Sans", sans-serif`;
@@ -1397,46 +1404,40 @@ export default function Hero3DStory() {
                     <ScrambleButton
                       href="#projects"
                       className="btn-primary"
-                      text="Proyek ↓"
+                      text={t.heroCtaProjects}
                     />
                   </div>
                 </div>
 
-                <aside className="hero-index-col" aria-label="Fokus Kompetensi">
+                <aside className="hero-index-col" aria-label={t.heroIndexAria}>
                   <div className="hero-index-item">
                     <span className="hero-index-no">I.</span>
                     <div>
-                      <h2>IT Support</h2>
-                      <p>
-                        Dapat melakukan troubleshooting os windows dan melakukan perakitan pc serta mengetahui spesifikasi setiap komponen nya.
-                      </p>
+                      <h2>{t.heroPillar1Title}</h2>
+                      <p>{t.heroPillar1Desc}</p>
                     </div>
                   </div>
 
                   <div className="hero-index-item">
                     <span className="hero-index-no">II.</span>
                     <div>
-                      <h2>Network Engineer</h2>
-                      <p>
-                        Pembuatan topologi sederhana untuk simulasi 4 divisi perusahaan dengan melakukan konfigurasi dasar agar jaringan berjalan dengan lancar dan optimal.
-                      </p>
+                      <h2>{t.heroPillar2Title}</h2>
+                      <p>{t.heroPillar2Desc}</p>
                     </div>
                   </div>
 
                   <div className="hero-index-item">
                     <span className="hero-index-no">III.</span>
                     <div>
-                      <h2>Game Developer</h2>
-                      <p>
-                        Pengembangan mekanik game pada karakter NPC dengan implementasi algoritma pathfinding di Godot Engine (Skripsi S1 Informatika).
-                      </p>
+                      <h2>{t.heroPillar3Title}</h2>
+                      <p>{t.heroPillar3Desc}</p>
                     </div>
                   </div>
                 </aside>
               </div>
 
               <div className="hero-footer-bar">
-                <span>Pendidikan: S1 Informatika</span>
+                <span>{t.heroEducation}</span>
                 <span className="hero-scroll-note">{profileData.scrollHintText}</span>
               </div>
             </div>

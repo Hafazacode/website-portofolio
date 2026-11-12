@@ -4,7 +4,7 @@
    ```bash
    npm run dev
    ```
-2. Buka link lokal yang muncul di terminal (biasanya `http://localhost:5173`) pada browser Anda.
+2. Buka link lokal yang muncul di terminal (biasanya `http://localhost:5173`).
 3. Untuk membuat hasil *build* siap *deploy* (production):
    ```bash
    npm run build

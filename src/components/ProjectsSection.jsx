@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import { projectsData, projectCategories } from '../data/portfolioData';
+import { useLanguage } from '../context/LanguageContext';
 
 // Ilustrasi kartu blueprint di belakang thumbnail proyek
 function ProjectBlueprintCardSvg({ categoryKey, index }) {
@@ -343,6 +343,7 @@ function ProjectArtSvg({ artType }) {
 }
 
 export default function ProjectsSection({ onSelectProject }) {
+  const { projectsData, projectCategories, t } = useLanguage();
   const [activeCategory, setActiveCategory] = useState('all');
 
   const filteredProjects =
@@ -354,11 +355,11 @@ export default function ProjectsSection({ onSelectProject }) {
     <div id="projects" className="projects-editorial-section">
       <div className="section-header-split">
         <div>
-          <span className="section-index">KARYA &amp; STUDI KASUS</span>
-          <h2>Proyek</h2>
+          <span className="section-index">{t.projectsBadge}</span>
+          <h2>{t.projectsTitle}</h2>
         </div>
 
-        <div className="project-category-tabs" role="tablist" aria-label="Filter Kategori Proyek">
+        <div className="project-category-tabs" role="tablist" aria-label={t.projectFilterAria}>
           {projectCategories.map((cat) => (
             <button
               key={cat.key}
@@ -449,7 +450,7 @@ export default function ProjectsSection({ onSelectProject }) {
 
               <div className="case-action-link">
                 <span className="case-action-text">
-                  {project.categoryKey === 'game' ? 'Lihat Detail Game' : 'Lihat Detail Topologi'}
+                  {project.categoryKey === 'game' ? t.viewGameDetail : t.viewNetworkDetail}
                   <svg
                     className="case-ink-underline"
                     viewBox="0 0 140 8"

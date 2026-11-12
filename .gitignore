@@ -1,5 +1,6 @@
-# Build output
 node_modules/
+
+# Build output
 dist/
 dist-ssr/
 

@@ -1,4 +1,5 @@
 import React from 'react';
+import { useLanguage } from '../context/LanguageContext';
 import ScrambleButton from './ScrambleButton';
 
 function InfoList({ items }) {
@@ -15,49 +16,53 @@ function InfoList({ items }) {
 }
 
 export default function ProjectModal({ project, onClose }) {
+  const { t, projectsData } = useLanguage();
+
   if (!project) return null;
+
+  const activeProj = projectsData.find((p) => p.id === project.id) || project;
 
   const handleBackdropClick = (e) => {
     if (e.target === e.currentTarget) onClose();
   };
 
-  const game = project.categoryKey === 'game' ? project.gameDetails : null;
-  const net = project.categoryKey === 'network' ? project.networkDetails : null;
+  const game = activeProj.categoryKey === 'game' ? activeProj.gameDetails : null;
+  const net = activeProj.categoryKey === 'network' ? activeProj.networkDetails : null;
 
   return (
     <div className="modal-backdrop open" onClick={handleBackdropClick}>
       <div className="modal-card" role="dialog" aria-modal="true" aria-labelledby="modalTitle">
         <div className="modal-top">
-          <span className="section-index">{project.category}</span>
+          <span className="section-index">{activeProj.category}</span>
           <button className="modal-close" type="button" onClick={onClose}>
-            Tutup ✕
+            {t.modalClose}
           </button>
         </div>
 
-        <h3 id="modalTitle">{project.title}</h3>
+        <h3 id="modalTitle">{activeProj.title}</h3>
 
         {/* detail untuk proyek game */}
         {game && (
           <div className="md-body">
             <section className="md-section">
-              <h4 className="md-label">Informasi Game</h4>
+              <h4 className="md-label">{t.modalGameInfo}</h4>
               <InfoList
                 items={[
-                  { label: 'Nama Game', value: game.gameTitle },
-                  { label: 'Genre', value: game.genre },
-                  { label: 'Platform', value: game.platformEngine },
-                  { label: 'Visual', value: game.perspectiveVisual },
-                  { label: 'AI NPC', value: game.coreAlgorithm },
+                  { label: t.modalLabelGameTitle, value: game.gameTitle },
+                  { label: t.modalLabelGenre, value: game.genre },
+                  { label: t.modalLabelPlatform, value: game.platformEngine },
+                  { label: t.modalLabelVisual, value: game.perspectiveVisual },
+                  { label: t.modalLabelAi, value: game.coreAlgorithm },
                 ]}
               />
             </section>
 
             <section className="md-section">
-              <h4 className="md-label">Mekanisme Singkat</h4>
+              <h4 className="md-label">{t.modalMechanics}</h4>
               <p className="md-lead">{game.mechanicsSummary}</p>
               <ul className="md-bullets">
-                {game.mechanicsPoints.map((pt) => (
-                  <li key={pt}>{pt}</li>
+                {game.mechanicsPoints.map((pt, i) => (
+                  <li key={i}>{pt}</li>
                 ))}
               </ul>
             </section>
@@ -70,10 +75,10 @@ export default function ProjectModal({ project, onClose }) {
             <p className="md-lead">{net.summary}</p>
 
             <section className="md-section">
-              <h4 className="md-label">Alur Topologi</h4>
+              <h4 className="md-label">{t.modalTopology}</h4>
               <ol className="md-flow">
                 {net.backbone.map((node, i) => (
-                  <li key={node}>
+                  <li key={i}>
                     <span className="md-flow-no">{i + 1}</span>
                     {node}
                   </li>
@@ -82,7 +87,7 @@ export default function ProjectModal({ project, onClose }) {
             </section>
 
             <section className="md-section">
-              <h4 className="md-label">Pembagian VLAN</h4>
+              <h4 className="md-label">{t.modalVlan}</h4>
               <div className="md-vlan-list">
                 {net.vlanTable.map((v) => (
                   <div className="md-vlan-row" key={v.vlanId}>
@@ -98,25 +103,25 @@ export default function ProjectModal({ project, onClose }) {
             </section>
 
             <section className="md-section">
-              <h4 className="md-label">Konfigurasi</h4>
+              <h4 className="md-label">{t.modalSpecs}</h4>
               <InfoList items={net.specs} />
             </section>
           </div>
         )}
         <div className="modal-footer-actions">
           <ScrambleButton
-            href={project.actionUrl}
-            target={project.categoryKey === 'game' ? '_blank' : undefined}
-            rel={project.categoryKey === 'game' ? 'noopener noreferrer' : undefined}
+            href={activeProj.actionUrl}
+            target={activeProj.categoryKey === 'game' ? '_blank' : undefined}
+            rel={activeProj.categoryKey === 'game' ? 'noopener noreferrer' : undefined}
             download={
-              project.categoryKey === 'network' || project.isDownload
-                ? project.downloadFileName || '10-20-2026.pkt'
+              activeProj.categoryKey === 'network' || activeProj.isDownload
+                ? activeProj.downloadFileName || '10-20-2026.pkt'
                 : undefined
             }
             className="btn-primary"
             text={
-              project.actionText ||
-              (project.categoryKey === 'game'
+              activeProj.actionText ||
+              (activeProj.categoryKey === 'game'
                 ? 'Lihat di itch.io ↗'
                 : 'Download Topologi (.pkt) ↓')
             }

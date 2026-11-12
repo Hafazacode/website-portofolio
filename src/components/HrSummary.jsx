@@ -1,7 +1,9 @@
 import React from 'react';
-import { profileData, personalBioData, hrSummaryData } from '../data/portfolioData';
+import { useLanguage } from '../context/LanguageContext';
 
 export default function HrSummary() {
+  const { profileData, personalBioData, hrSummaryData, t } = useLanguage();
+
   return (
     <div className="editorial-summary-section">
       {/* foto profil & biodata */}
@@ -33,7 +35,7 @@ export default function HrSummary() {
           <div className="classic-biodata-inner">
             <div className="classic-window-header">
               <span className="classic-ornament-line" aria-hidden="true" />
-              <span className="classic-crest-title">Biodata Personal</span>
+              <span className="classic-crest-title">{t.hrBioTitle}</span>
               <span className="classic-ornament-line" aria-hidden="true" />
             </div>
 
@@ -52,8 +54,8 @@ export default function HrSummary() {
       {/* ringkasan kualifikasi */}
       <div className="summary-list-col">
         <div className="summary-right-header">
-          <span className="section-index">PROFIL &amp; NILAI TAMBAH</span>
-          <h2 className="summary-right-title">Kualifikasi &amp; Fokus Peran</h2>
+          <span className="section-index">{t.hrBadge}</span>
+          <h2 className="summary-right-title">{t.hrTitle}</h2>
         </div>
 
         {hrSummaryData.map((item, index) => (

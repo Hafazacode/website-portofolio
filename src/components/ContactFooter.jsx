@@ -1,8 +1,9 @@
 import React, { useState } from 'react';
-import { profileData } from '../data/portfolioData';
+import { useLanguage } from '../context/LanguageContext';
 import ScrambleButton from './ScrambleButton';
 
 export default function ContactFooter() {
+  const { profileData, t } = useLanguage();
   const [copied, setCopied] = useState(false);
 
   const handleCopyEmail = () => {
@@ -21,16 +22,15 @@ export default function ContactFooter() {
     setTimeout(() => setCopied(false), 2400);
   };
 
+  const contactDescText = t.contactDesc.replace('{name}', profileData.fullName);
+
   return (
     <footer className="editorial-footer" id="contact">
       <div className="footer-main-row">
         <div className="footer-copy-col">
-          <span className="section-index">DISKUSI &amp; KONTAK</span>
-          <h3>Tertarik berdiskusi atau menjadwalkan sesi wawancara?</h3>
-          <p>
-            {profileData.fullName} · Cilacap, Jawa Tengah — Terbuka untuk peran penuh waktu
-            (Full-Time) pada bidang IT Support, Network, maupun Software Engineering.
-          </p>
+          <span className="section-index">{t.contactBadge}</span>
+          <h3>{t.contactTitle}</h3>
+          <p>{contactDescText}</p>
         </div>
 
         <div className="footer-actions-col">
@@ -38,7 +38,11 @@ export default function ContactFooter() {
             className="btn-primary"
             type="button"
             onClick={handleCopyEmail}
-            text={copied ? `Tersalin: ${profileData.email}` : `Salin Email (${profileData.email})`}
+            text={
+              copied
+                ? t.contactCopied.replace('{email}', profileData.email)
+                : t.contactCopyBtn.replace('{email}', profileData.email)
+            }
           />
           <div className="footer-links-row">
             <ScrambleButton
